@@ -5,7 +5,7 @@
 #define OFF 0
 
 #define IOPA_EN OFF
-#define IOPC_EN ON
-#define IOPD_EN OFF
+#define IOPC_EN OFF
+#define IOPD_EN ON
 
 #endif

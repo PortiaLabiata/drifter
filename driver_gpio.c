@@ -30,6 +30,11 @@ void gpio_configure(GPIO_TypeDef *port, pin_t pin, enum gpio_mode_e mode,
     volatile uint32_t *cfglr = &port->CFGLR;
     *cfglr &= ~_mode_to_mask(pin, GPIO_MODE_MASK, GPIO_CNF_MASK);
     *cfglr |= _mode_to_mask(pin, mode, cnf);
+    if (cnf == GPIO_CNF_PUP) {
+        port->OUTDR |= (1 << pin);
+    } else {
+        port->OUTDR &= ~(1 << pin);
+    }        
 }
 
 void gpio_set(GPIO_TypeDef *port, pin_t pin) {

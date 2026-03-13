@@ -15,11 +15,17 @@ enum gpio_mode_e {
 };
 
 enum gpio_cnf_e {
-    GPIO_CNF_ANALOG_PP = 0b00,
-    GPIO_CNF_FLOATING_OD = 0b01,
-    GPIO_CNF_PUPDOWN_AF_PP = 0b10,
+    GPIO_CNF_ANALOG = 0b00,
+    GPIO_CNF_FLOATING = 0b01,
+    GPIO_CNF_PUP = 0b10,
+    GPIO_CNF_PDOWN = 0b10,
+
+    GPIO_CNF_PP = 0b00,
+    GPIO_CNF_OD = 0b01,
+    GPIO_CNF_AF_PP = 0b10,
     GPIO_CNF_AF_OD = 0b11,
-    GPIO_CNF_MASK = 0b11
+
+    GPIO_CNF_MASK = 0b11,
 };
 
 void gpio_begin();

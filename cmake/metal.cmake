@@ -18,7 +18,7 @@ target_sources(bootloader.elf PRIVATE
   metal/bootloader.s)
 
 set(COMPILE_OPTIONS
-  -Os
+  -Og
   -flto
   -ffunction-sections
   -fdata-sections
@@ -31,7 +31,6 @@ set(COMPILE_OPTIONS
   -DCH32V00x=1
 
   -nostartfiles
-  -nostdlib
   --specs=nano.specs
   --specs=nosys.specs)
 

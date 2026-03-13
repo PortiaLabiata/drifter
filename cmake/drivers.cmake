@@ -1,4 +1,5 @@
 add_library(drivers STATIC)
-target_link_libraries(drivers PUBLIC metal)
-target_sources(drivers PUBLIC
-  driver_gpio.c)
+target_link_libraries(drivers PRIVATE metal)
+target_sources(drivers PRIVATE
+  driver_gpio.c
+  driver_usart.c)

@@ -1,18 +1,26 @@
+#include "time_measurement.h"
+#include "driver_usart.h"
 #include "driver_gpio.h"
 
-void delay() {
-    for (int i = 0; i < 1000; i++) {
-        asm ("nop");
-    }
-}  
-
 int main() {
+    time_begin();
     gpio_begin();
-    gpio_configure(GPIOC, 0, GPIO_MODE_OUTPUT_30MHZ, GPIO_CNF_ANALOG_PP);
+    gpio_configure(GPIOD, 5,
+                   GPIO_MODE_OUTPUT_10MHZ, GPIO_CNF_AF_PP);
+    gpio_configure(GPIOD, 6,
+                   GPIO_MODE_INPUT, GPIO_CNF_FLOATING);
+
+    usart_begin();
+    
+    usart_config_s usart_cfg = {
+        .speed = 9600,
+        .word_length = USART_WORD_LENGTH_8BIT,
+        .parity = USART_PARITY_DISABLED,
+    };
+    usart_configure(&usart_cfg);
+
     while (1) {
-        gpio_set(GPIOC, 0);
-        delay();
-        gpio_reset(GPIOC, 0);
-        delay();
+        usart_write_blocking((uint8_t*)"Test\r\n", 6);
+        delay(1000);
     }    
 }  
