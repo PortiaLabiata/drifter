@@ -37,7 +37,7 @@ int main() {
     while (1) {
         ssize_t res = gcs_update_tx(buffer);
         if (res > 0)
-            usart_write_blocking(buffer, res);
+            usart_write(buffer, res);
         delay(20);
     }    
 }

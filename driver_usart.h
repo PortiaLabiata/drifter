@@ -81,6 +81,9 @@ void usart_configure(usart_config_s *config);
 void usart_write_blocking(uint8_t *bytes, size_t size);
 void usart_read_blocking(uint8_t *bytes, size_t size);
 
+size_t usart_write(uint8_t *bytes, size_t size);
+bool usart_read(uint8_t *byte);
+
 const usart_errors_s *usart_errors();
 
 #endif
