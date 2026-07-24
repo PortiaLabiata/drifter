@@ -4,5 +4,6 @@
 
 void time_begin();
 time_period_t millis();
+void delay(time_period_t ms);
 
 #endif

@@ -21,11 +21,10 @@ int main() {
                    GPIO_MODE_OUTPUT_10MHZ, GPIO_CNF_AF_PP);
     gpio_configure(GPIOD, 6,
                    GPIO_MODE_INPUT, GPIO_CNF_FLOATING);
-
     usart_begin();
     
     usart_config_s usart_cfg = {
-        .speed = 115200,
+        .speed = 9600,
         .word_length = USART_WORD_LENGTH_8BIT,
         .parity = USART_PARITY_DISABLED,
     };
