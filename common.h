@@ -23,6 +23,7 @@ typedef uint32_t time_period_t;
 
 #define PACKED __attribute__((packed))
 #define ALIGNED __attribute__((aligned))
+#define ATTR_INTERRUPT __attribute__((interrupt("WCH-Interrupt-fast")))
 #define BITFIELD(name) bitflag_t name : 1;
 
 #endif

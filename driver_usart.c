@@ -49,7 +49,7 @@ void usart_configure(usart_config_s *config) {
     NVIC_EnableIRQ(USART1_IRQn);
 }
 
-void USART1_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
+void USART1_IRQHandler(void) ATTR_INTERRUPT;
 void USART1_IRQHandler() {
     usart_statr_u *sr = (usart_statr_u*)&USART1->STATR;
     usart_ctlr1_u *cr = (usart_ctlr1_u*)&USART1->CTLR1;
