@@ -6,7 +6,7 @@
 #include <stdbool.h>
 #include "common.h"
 
-#define ring_buffer_size 32
+#define ring_buffer_size 140
 typedef struct {
     uint8_t buffer[ring_buffer_size];
     size_t size;

@@ -6,7 +6,10 @@
 #include <stdbool.h>
 
 #define MAVLINK_COMM_NUM_BUFFERS 1
+#define MAVLINK_NO_SIGN_PACKET 1
+#define MAVLINK_NO_SIGNATURE_CHECK 1
 #include "mavlink/common/mavlink.h"
+
 #include "time_measurement.h"
 
 typedef struct {
@@ -15,9 +18,6 @@ typedef struct {
     uint32_t id;
     void (*hook)(mavlink_message_t *msg);
 } gcs_message_s;
-
-extern gcs_message_s _out_messages[];
-extern gcs_message_s _in_messages[];
 
 typedef struct {
     mavlink_message_t current_msg;

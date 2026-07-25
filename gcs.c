@@ -1,13 +1,12 @@
 #include "gcs.h"
-
-#define MESSAGES_END 
+#include "mavlink/common/mavlink_msg_rc_channels_override.h"
 
 static gcs_s _gcs;
 
-const size_t _out_messages_num = 2;
-const size_t _in_messages_num = 2;
+#define _out_messages_num (size_t)2
+#define _in_messages_num (size_t)3
 
-gcs_message_s _out_messages[] = {
+static gcs_message_s _out_messages[_out_messages_num] = {
     {
         .period = 100, 
         .last_sent_time = 0, 
@@ -22,11 +21,17 @@ gcs_message_s _out_messages[] = {
     },
 };
 
-gcs_message_s _in_messages[] = {
+static gcs_message_s _in_messages[_in_messages_num] = {
     {
         .period = 0, 
         .last_sent_time = 0, 
         .id = MAVLINK_MSG_ID_MANUAL_CONTROL, 
+        .hook = NULL
+    },
+    {
+        .period = 0,
+        .last_sent_time = 0,
+        .id = MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE,
         .hook = NULL
     },
     {

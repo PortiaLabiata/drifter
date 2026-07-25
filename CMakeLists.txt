@@ -15,7 +15,11 @@ target_sources(firmware.elf PUBLIC
 target_link_libraries(firmware.elf PUBLIC
   metal drivers)
 target_compile_options(firmware.elf PUBLIC
-  -Wno-address-of-packed-member -Og)
+    -Wno-address-of-packed-member 
+    -Og 
+    -Wall 
+    -Wextra 
+    -Werror)
 
 set(OCD_HOME /home/portia_labiata/ch32_toolchain/OpenOCD/OpenOCD)
 set(TOOLCHAIN /home/portia_labiata/ch32_toolchain)

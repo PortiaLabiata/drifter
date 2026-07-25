@@ -1,4 +1,3 @@
-#include "time_measurement.h"
 #include "driver_usart.h"
 #include "hardware_config.h"
 #include "gcs.h"
@@ -24,7 +23,11 @@ void manual_control_hook(mavlink_message_t *msg) {
 }
 
 void rc_hook(mavlink_message_t *msg) {
+    (void)msg;
+}
 
+void rc_override_hook(mavlink_message_t *msg) {
+    (void)msg;
 }
 
 int main() {
@@ -36,6 +39,7 @@ int main() {
     gcs_set_out_hook(MAVLINK_MSG_ID_RC_CHANNELS, rc_hook);
 
     gcs_set_in_hook(MAVLINK_MSG_ID_MANUAL_CONTROL, manual_control_hook);
+    gcs_set_in_hook(MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE, rc_override_hook);
 
     static uint8_t buffer[280];
     while (1) {
@@ -48,7 +52,6 @@ int main() {
         if (usart_read(&byte)) {
             gcs_update_rx(byte);
         }
-        delay(20);
     }    
 }
 
