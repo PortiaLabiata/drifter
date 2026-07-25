@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
+
+#define MAVLINK_COMM_NUM_BUFFERS 1
 #include "mavlink/common/mavlink.h"
 #include "time_measurement.h"
 
@@ -20,10 +22,11 @@ extern gcs_message_s _in_messages[];
 typedef struct {
     mavlink_message_t current_msg;
     mavlink_status_t current_status;
-    uint8_t tx_buffer[280];
 } gcs_s;    
 
 void gcs_update_rx(uint8_t c);
 ssize_t gcs_update_tx(uint8_t *buffer);
+void gcs_set_in_hook(uint8_t id, void (*hook)(mavlink_message_t *msg));
+void gcs_set_out_hook(uint8_t id, void (*hook)(mavlink_message_t *msg));
 
 #endif

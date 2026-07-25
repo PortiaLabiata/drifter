@@ -1,16 +1,40 @@
 #include "gcs.h"
 
+#define MESSAGES_END 
+
 static gcs_s _gcs;
 
-const size_t _out_messages_num = 1;
-const size_t _in_messages_num = 1;
+const size_t _out_messages_num = 2;
+const size_t _in_messages_num = 2;
 
 gcs_message_s _out_messages[] = {
-    {.period = 1000, .last_sent_time = 0, .id = 0, .hook = NULL},
+    {
+        .period = 100, 
+        .last_sent_time = 0, 
+        .id = MAVLINK_MSG_ID_RC_CHANNELS, 
+        .hook = NULL
+    },
+    {
+        .period = 1000, 
+        .last_sent_time = 0, 
+        .id = MAVLINK_MSG_ID_HEARTBEAT, 
+        .hook = NULL
+    },
 };
 
 gcs_message_s _in_messages[] = {
-    {.period = 0, .last_sent_time = 0, .id = 0, .hook = NULL},
+    {
+        .period = 0, 
+        .last_sent_time = 0, 
+        .id = MAVLINK_MSG_ID_MANUAL_CONTROL, 
+        .hook = NULL
+    },
+    {
+        .period = 0, 
+        .last_sent_time = 0, 
+        .id = MAVLINK_MSG_ID_HEARTBEAT, 
+        .hook = NULL
+    },
 };
 
 static bool _process_message(mavlink_message_t *msg) {
@@ -52,3 +76,23 @@ ssize_t gcs_update_tx(uint8_t *buffer) {
     }
     return -1;
 }    
+
+void gcs_set_in_hook(uint8_t id, void (*hook)(mavlink_message_t *msg)) {
+    for (size_t i = 0; i < _in_messages_num; i++) {
+        gcs_message_s *msg = &_in_messages[i];
+        if (msg->id == id) {
+            msg->hook = hook;
+            break;
+        }
+    }
+}
+
+void gcs_set_out_hook(uint8_t id, void (*hook)(mavlink_message_t *msg)) {
+    for (size_t i = 0; i < _out_messages_num; i++) {
+        gcs_message_s *msg = &_out_messages[i];
+        if (msg->id == id) {
+            msg->hook = hook;
+            break;
+        }
+    }
+}

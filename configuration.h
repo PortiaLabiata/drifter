@@ -8,4 +8,7 @@
 #define IOPC_EN OFF
 #define IOPD_EN ON
 
+#define TIM1_EN ON
+#define TIM2_EN OFF
+
 #endif

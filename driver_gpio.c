@@ -13,6 +13,7 @@ static void _assert_ioline(GPIO_TypeDef *port, pin_t pin) {
 }
 
 void gpio_begin() {
+    RCC->APB2PCENR |= RCC_AFIOEN;
 #if IOPA_EN
     RCC->APB2PCENR |= RCC_IOPAEN;
 #endif
