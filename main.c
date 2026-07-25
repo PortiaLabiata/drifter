@@ -58,5 +58,4 @@ int main() {
 void HardFault_Handler() {
     while (1)
         ;
-    
 }    

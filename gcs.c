@@ -1,5 +1,4 @@
 #include "gcs.h"
-#include "mavlink/common/mavlink_msg_rc_channels_override.h"
 
 static gcs_s _gcs;
 
